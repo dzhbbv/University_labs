@@ -6,23 +6,39 @@
 
 int int_random(int s, int e);
 void fill_array(int arr[N][M], int a, int b);
-void print_arr(int arr[N][M]);
-void fill_array_from_file(int arr[N][M]);
 int find_max(int arr[N][M]);
 double find_avg(int arr[N][M]);
 int find_count(int arr[N][M]);
 
 int main(void) {
+    FILE * fp = fopen("output6.txt", "w");
     srand(time(NULL));
     int a, b;
     scanf("%d %d", &a, &b);
     int init_array[N][M];
 
     fill_array(init_array, a, b);
-    print_arr(init_array);
+    
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            fprintf(fp, "%4d", init_array[i][j]);
+        }
+        fprintf(fp, "\n");
+    }
+    fclose(fp);
     
     int new_array[N][M];
-    fill_array_from_file(new_array);
+    fp = fopen("output6.txt", "r");
+    if (!fp) {
+        printf("Ошибка чтения файла\n");
+        exit(-1);
+    }
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            fscanf(fp, "%d", &new_array[i][j]);
+        }
+    }
+    fclose(fp);
     
     printf("максимальный положительный элемент = %d\n", find_max(new_array));
     printf("среднее арифметическое значение элементов в нечетных строках = %lf\n", find_avg(new_array));
@@ -41,31 +57,6 @@ void fill_array(int arr[N][M], int a, int b) {
 
 int int_random(int s, int e) {
     return rand() % (e - s + 1) + s;
-} 
-
-void print_arr(int arr[N][M]) {
-    FILE * fp = fopen("output6.txt", "w");
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            fprintf(fp, "%d\t", arr[i][j]);
-        }
-        fprintf(fp, "\n");
-    }
-    fclose(fp);
-}
-
-void fill_array_from_file(int arr[N][M]) {
-    FILE * fp = fopen("output6.txt", "r");
-    if (!fp) {
-        printf("Ошибка чтения файла\n");
-        exit(-1);
-    }
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < M; j++) {
-            fscanf(fp, "%d", &arr[i][j]);
-        }
-    }
-    fclose(fp);
 }
 
 void print_arr_console(int arr[N][M]) {
@@ -78,7 +69,7 @@ void print_arr_console(int arr[N][M]) {
 }
 
 int find_max(int arr[N][M]) {
-    int maxim = 0;
+    int maxim = arr[0][0];
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             if (maxim < arr[i][j]) {

@@ -3,9 +3,12 @@
 #include <time.h>
 #define N 3
 
-int int_random(int s, int e);
-double frandom(double s, double e);
-void print_arrs(int arr[N], double farr[N]);
+int int_random(int s, int e) {
+    return rand() % (e - s + 1) + s;
+}
+double frandom(double s, double e) {
+    return (double) rand() / RAND_MAX * (e - s) + s;
+}
 
 int main(void) {
     srand(time(NULL));
@@ -26,25 +29,7 @@ int main(void) {
     for (int i = 0; i < N; i++) {
         printf("array_double[%d] = %lf\t", i, array_double[i]);
     }
-    
     fclose(fp);
-    print_arrs(array_int, array_double);
-
+    
     return 0;
-}
-
-void print_arrs(int arr[N], double farr[N]) {
-    for (int i = 0; i < N; i++) {
-    }
-    printf("\n");
-    for (int i = 0; i < N; i++) {
-    }
-}
-
-int int_random(int s, int e) {
-    return rand() % (e - s + 1) + s;
-}
-
-double frandom(double s, double e) {
-    return (double) rand() / RAND_MAX * (e - s) + s;
 }

@@ -10,7 +10,8 @@ int main(void) {
     }
     for (int i = 0; i < N; i++) {
         fscanf(fp, "%d", &arr[i]);
-    }
+        printf("%d\t", arr[i]);
+    } printf("\n");
     
     for (int i = 0; i < N; i++) {
         if (arr[i]%3==0 && arr[i] < 0) {

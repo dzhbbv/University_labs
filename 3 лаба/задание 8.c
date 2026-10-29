@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define N 3
-
-void Клёвые_фишки();
+#define N 5
 
 int int_random(int s, int e);
 double frandom(double s, double e);
@@ -25,15 +23,11 @@ int main(void) {
     printf("сумму отрицательных элементов на главной диагонали %lf\n", find_sum(arr));
     printf("количество элементов, которые меньше случайного элемента массива %d\n", find_count(arr));
 
-    Клёвые_фишки();
-
     return 0;
 }
 
 int find_count(double arr[N][N]) {
-    int index1 = int_random(0, N-1);
-    int index2 = int_random(0, N-1);
-    double x = arr[index1][index2];
+    double x = arr[int_random(0, N-1)][int_random(0, N-1)];
     printf("Случайный элемент %lf\n", x);
     int count = 0;
     for (int i = 0; i < N; i++) {
@@ -60,17 +54,12 @@ double find_sum(double arr[N][N]) {
 
 double find_max(double arr[N][N]) {
     double maxim = 0;
-    int count = 0;
-    for (int i = 0; i < N; i++) {
-        if (count > 4) {
-            break;
-        }
+    for (int i = 0; i < 4; i++) {
         for (int j = 0; j < N; j++) {
             if (arr[i][j] > 0 && maxim < arr[i][j]) {
                 maxim = arr[i][j];
             }
         }
-        count++;
     }
     return maxim;
 }
@@ -98,20 +87,4 @@ double frandom(double s, double e) {
 
 int int_random(int s, int e) {
     return rand() % (e - s + 1) + s;
-}
-
-void Клёвые_фишки() {
-    printf("!!! КЛЁВЫЕ ФИШКИ ДЛЯ КОНТРОЛЬНОЙ :) !!!\n \
-    i+=1\n \
-    scanf(...) == ...\n \
-    n*(-1)\n \
-    int minim = INT_MAX;\n \
-    minim = 1000000000;\n \
-    Как вас зовут?\n \
-    Оно же работает\n \
-    FILE * fp = fopen(\"input.txt\", \"w\");\n \
-    if (!fp) {...}\n \
-    void русская_функция_которая_ищет_максимум();\n \
-    Массивы без #define\n \
-    Поставьте автомат\n");
 }

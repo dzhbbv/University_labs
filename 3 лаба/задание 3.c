@@ -9,7 +9,6 @@ double frandom(double s, double e) {
 
 int main(void) {
     srand(time(NULL));
-    int pravda;
     double a, b;
     scanf("%lf %lf", &a, &b);
 
@@ -21,15 +20,12 @@ int main(void) {
     }
 
     for (int i = 0; i < N; i++) {
-        if (arr[i] < 0 && (int)arr[i]%7 == 0) {
+        if ((int)arr[i] < 0 && (int)arr[i]%7 == 0) {
             printf("\n%lf\n", arr[i]);
-            pravda = 1;
-            break;
+            exit(0);
         }
     }
-    if (!pravda) {
-        printf("\nОтрицательных чисел не обнаружено\n");
-    }
+    printf("\nОтрицательных чисел кратных 7 не обнаружено\n");
 
     return 0;
 }

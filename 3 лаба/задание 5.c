@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <limits.h>
 #define N 5
 
 int min_mod_6(int arr[N]);
@@ -27,13 +26,13 @@ int main(void) {
 }
 
 int min_mod_6(int arr[N]) {
-    int ans = INT_MAX;
+    int ans = arr[0];
     for (int i = 0; i < N; i++) {
         if (arr[i] % 6 == 0 && ans > arr[i]) {
             ans = arr[i];
         }
     }
-    if (ans == INT_MAX) {
+    if (ans % 6 != 0) {
         printf("Не найдено число кратное 6\n");
         exit(-1);
     }
